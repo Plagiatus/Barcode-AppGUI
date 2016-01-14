@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -134,13 +133,13 @@ public class BarcodeGUI {
 		//Logos
 		ImageIcon logo = new ImageIcon("media/Logo.png");
 		Image logo1 = logo.getImage();
-		Image logo2 = logo1.getScaledInstance(50, 38, java.awt.Image.SCALE_SMOOTH);
+		Image logo2 = logo1.getScaledInstance(100, 76, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon logo3 = new ImageIcon(logo2);
 		JLabel logoLabel = new JLabel(logo3);
 		
 		ImageIcon caLogo = new ImageIcon("media/campfire_logo.png");
 		Image caLogo1 = caLogo.getImage();
-		Image caLogo2 = caLogo1.getScaledInstance(50, 75, java.awt.Image.SCALE_SMOOTH);
+		Image caLogo2 = caLogo1.getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon caLogo3 = new ImageIcon(caLogo2);
 		JLabel caLogoLabel = new JLabel(caLogo3);
 		
@@ -151,7 +150,20 @@ public class BarcodeGUI {
 		
 		//Text
 		
-		JLabel infoText = new JLabel("<html>Hier Infotext einfügen<br><br>&copy;Campfire Software</html>");
+		String infoTxt = new String();
+		infoTxt = "<html><strong>Barcode Finder</strong><br>"
+				+ "<font size=2>Erstellt als Semesterprojekt an der <em>Fakultät Informatik der Hochschule Furtwangen</em>.<br>"
+				+ "<br>" 
+				+ "Verwendete Open-Source Bibliotheken:<br>"
+				+ "<ul>"
+				+ "<li>OpenCV</li>"
+				+ "<li>ZBar</li>"
+				+ "<li>...</li>"
+				+ "</ul>"
+				+ "&copy; Campfire Software, 2016<br>"
+				+ "veröffentlicht unter \"GNU General Public License\"</html>";
+		
+		JLabel infoText = new JLabel(infoTxt);
 		
 		infoPanel.add(Box.createVerticalStrut(10));
 		infoPanel.add(logos, BorderLayout.EAST);
@@ -257,9 +269,9 @@ public class BarcodeGUI {
 		String command = execute + " " + stepByStep + " " + showAllSteps + " " + search + " " + webcam + " " + file;
 		if(webcam){
 			if(webcamIntern)
-				command += "i";
+				command += "i ";
 			else
-				command += "e";
+				command += "e ";
 			
 			if(webcamSingle)
 				command+= "s";
