@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +32,7 @@ public class BarcodeGUI {
 		// make sure the program exits when the frame closes
 		guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		guiFrame.setTitle("Barcode Finder");
-		guiFrame.setSize(300, 250);
+		guiFrame.setSize(300, 300);
 
 		// Fenster zentrieren
 		guiFrame.setLocationRelativeTo(null);
@@ -58,33 +60,102 @@ public class BarcodeGUI {
 		JButton dateiBut = new JButton("Bild aus Datei");
 
 		barcodePanel.add(webcamBut);
-		barcodePanel.add(dateiBut);
-
+		barcodePanel.add(dateiBut);		
 		
-		////////////////////////////////////////////////////// Optionen
-		final JPanel optionsPanel = new JPanel();
-		optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.PAGE_AXIS));
 		
-		JLabel opt = new JLabel("Optionen:");
-		JCheckBox stepByStep = new JCheckBox("Schritt für Schritt");
-		JCheckBox showAllFrames = new JCheckBox("Alle Zwischenschritte zeigen");
-
-		// Barcode-App.exe finden
-		JButton findExeBut = new JButton("Finde Barcode-App.exe");
+		///////////////////////////////////////////////////// Optionen
+		final JPanel optionPanel = new JPanel();
+		optionPanel.setLayout(new BoxLayout(optionPanel, BoxLayout.PAGE_AXIS));
+		
 		JCheckBox searchResult = new JCheckBox("Führe Internet Suche durch");
 		searchResult.setSelected(true);
+		
+		//interne/externe Webcam
+		JLabel webcam = new JLabel("<html><font size=5>Webcam:</font></html>");
+		JLabel webcamIE = new JLabel("intern/extern");
+		JRadioButton webcamIntern = new JRadioButton("interne Webcam",true);
+		JRadioButton webcamExtern = new JRadioButton("externe Webcam");
+		ButtonGroup webcamGroup = new ButtonGroup();
+		webcamGroup.add(webcamIntern); webcamGroup.add(webcamExtern);
+		
+		
+		//einzelbild/bilderstream
+		JLabel webcamStream = new JLabel("Eingabemodus:");
+		JRadioButton webcamSingle = new JRadioButton("Einzelbild (manuell)",true);
+		JRadioButton webcamMulti = new JRadioButton("Dauerstream");
+		ButtonGroup webcamGroup2 = new ButtonGroup();
+		webcamGroup2.add(webcamSingle); webcamGroup2.add(webcamMulti);
+		
+		
+		optionPanel.add(Box.createVerticalStrut(10));
+		optionPanel.add(searchResult);
+		optionPanel.add(Box.createVerticalStrut(20));
+		optionPanel.add(webcam); optionPanel.add(Box.createVerticalStrut(10));
+		optionPanel.add(webcamIE);
+		optionPanel.add(webcamIntern);
+		optionPanel.add(webcamExtern);optionPanel.add(Box.createVerticalStrut(10));
+		optionPanel.add(webcamStream);
+		optionPanel.add(webcamSingle);
+		optionPanel.add(webcamMulti);
+		
+		
+		
+		////////////////////////////////////////////////////// Erweitert
+		final JPanel advancedPanel = new JPanel();
+		advancedPanel.setLayout(new BoxLayout(advancedPanel, BoxLayout.PAGE_AXIS));
+		
+		JCheckBox stepByStep = new JCheckBox("Schritt für Schritt");
+		JCheckBox showAllFrames = new JCheckBox("Alle Zwischenschritte zeigen");
+		
+		//Sprachausgabe an-aus
+		JCheckBox speach = new JCheckBox("Sprachausgabe");
+		
+		// Barcode-App.exe finden
+		JButton findExeBut = new JButton("Finde Barcode-App.exe");
 		JLabel findExeButExplanation = new JLabel("(Nur wenn Datei nicht in selbem Ordner)");
-		optionsPanel.add(opt);
-		optionsPanel.add(stepByStep);
-		optionsPanel.add(showAllFrames);
-		optionsPanel.add(searchResult);
+		advancedPanel.add(Box.createVerticalStrut(10));
+		advancedPanel.add(stepByStep);
+		advancedPanel.add(showAllFrames);
 		
-		optionsPanel.add(Box.createVerticalStrut(20));
 		
-		optionsPanel.add(findExeBut);
-		optionsPanel.add(findExeButExplanation);
-
 		
+		advancedPanel.add(Box.createVerticalStrut(20));
+		advancedPanel.add(speach);
+		
+		advancedPanel.add(Box.createVerticalStrut(20));
+		advancedPanel.add(findExeBut);
+		advancedPanel.add(findExeButExplanation);
+		
+		
+		///////////////////////////////////////////////////// Info
+		final JPanel infoPanel = new JPanel();
+		infoPanel.setLayout(new BorderLayout());
+		
+		//Logos
+		ImageIcon logo = new ImageIcon("media/Logo.png");
+		Image logo1 = logo.getImage();
+		Image logo2 = logo1.getScaledInstance(50, 38, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon logo3 = new ImageIcon(logo2);
+		JLabel logoLabel = new JLabel(logo3);
+		
+		ImageIcon caLogo = new ImageIcon("media/campfire_logo.png");
+		Image caLogo1 = caLogo.getImage();
+		Image caLogo2 = caLogo1.getScaledInstance(50, 75, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon caLogo3 = new ImageIcon(caLogo2);
+		JLabel caLogoLabel = new JLabel(caLogo3);
+		
+		JPanel logos = new JPanel();
+		logos.setLayout(new BoxLayout(logos, BoxLayout.PAGE_AXIS));
+		logos.add(logoLabel);
+		logos.add(caLogoLabel);
+		
+		//Text
+		
+		JLabel infoText = new JLabel("<html>Hier Infotext einfügen<br><br>&copy;Campfire Software</html>");
+		
+		infoPanel.add(Box.createVerticalStrut(10));
+		infoPanel.add(logos, BorderLayout.EAST);
+		infoPanel.add(infoText, BorderLayout.CENTER);
 		
 		
 		///////////////////////////////////////////////////// BUTTONS
@@ -112,14 +183,14 @@ public class BarcodeGUI {
 				}
 				
 				
-				startDetection(exampleImgPath , execute, stepByStep.isSelected(),showAllFrames.isSelected(),searchResult.isSelected());
+				startDetection(exampleImgPath , execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected());
 			}
 		});
 
 		webcamBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				startDetection("", execute, stepByStep.isSelected(),showAllFrames.isSelected(),searchResult.isSelected(), true);;
+				startDetection("", execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected(), true, webcamIntern.isSelected(), webcamSingle.isSelected());;
 			}
 		});
 		
@@ -157,14 +228,16 @@ public class BarcodeGUI {
 					File file = fileChooser.getSelectedFile();
 					String fileString = fixPath(file.toString());
 					//System.out.println(fileString);
-					startDetection(fileString, execute, stepByStep.isSelected(),showAllFrames.isSelected(),searchResult.isSelected());
+					startDetection(fileString, execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected());
 				}
 			}
 		});
 
 		JTabbedPane tabbedPanel = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 		tabbedPanel.addTab("Barcode", barcodePanel);
-		tabbedPanel.addTab("Optionen", optionsPanel);
+		tabbedPanel.addTab("Optionen",optionPanel);
+		tabbedPanel.addTab("Erweitert", advancedPanel);
+		tabbedPanel.addTab("Info",infoPanel);
 
 		guiFrame.add(tabbedPanel, BorderLayout.CENTER);
 
@@ -175,13 +248,24 @@ public class BarcodeGUI {
 
 	}
 	
-	private void startDetection(String file, String execute, boolean sbs, boolean aza, boolean search){
-		startDetection(file,execute,sbs,aza,search,false);
+	private void startDetection(String file, String execute, boolean stepByStep, boolean showAllSteps, boolean speach, boolean search){
+		startDetection(file,execute,stepByStep,showAllSteps,speach,search,false,false,false);
 	}
 
-	private void startDetection(String file, String execute, boolean sbs, boolean aza, boolean search, boolean webcam) {
+	private void startDetection(String file, String execute, boolean stepByStep, boolean showAllSteps, boolean search, boolean speach, boolean webcam, boolean webcamIntern, boolean webcamSingle) {
 		Process p;
-		String command = execute + " " + sbs + " " + aza + " " + search + " " + webcam + " " + file;
+		String command = execute + " " + stepByStep + " " + showAllSteps + " " + search + " " + webcam + " " + file;
+		if(webcam){
+			if(webcamIntern)
+				command += "i";
+			else
+				command += "e";
+			
+			if(webcamSingle)
+				command+= "s";
+			else
+				command += "m";
+		}
 		System.out.println(command);
 		try {
 			p = Runtime.getRuntime().exec(command);
