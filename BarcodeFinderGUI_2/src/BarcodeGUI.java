@@ -23,7 +23,7 @@ public class BarcodeGUI {
 		execute = "Barcode-App.exe";
 		JFrame guiFrame = new JFrame();
 		try {
-			guiFrame.setIconImage(ImageIO.read(new File("media/Logo.png")));
+			guiFrame.setIconImage(ImageIO.read(new File("media/pupille.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -131,9 +131,9 @@ public class BarcodeGUI {
 		infoPanel.setLayout(new BorderLayout());
 		
 		//Logos
-		ImageIcon logo = new ImageIcon("media/Logo.png");
+		ImageIcon logo = new ImageIcon("media/Logo_hr.png");
 		Image logo1 = logo.getImage();
-		Image logo2 = logo1.getScaledInstance(100, 76, java.awt.Image.SCALE_SMOOTH);
+		Image logo2 = logo1.getScaledInstance(100, 55, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon logo3 = new ImageIcon(logo2);
 		JLabel logoLabel = new JLabel(logo3);
 		
