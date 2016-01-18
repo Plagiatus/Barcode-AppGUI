@@ -262,12 +262,12 @@ public class BarcodeGUI {
 	}
 	
 	private void startDetection(String file, String execute, boolean stepByStep, boolean showAllSteps, boolean speach, boolean search){
-		startDetection(file,execute,stepByStep,showAllSteps,speach,search,false,false,false);
+		startDetection(file,execute,stepByStep,showAllSteps,search,speach,false,false,false);
 	}
 
 	private void startDetection(String file, String execute, boolean stepByStep, boolean showAllSteps, boolean search, boolean speach, boolean webcam, boolean webcamIntern, boolean webcamSingle) {
 		Process p;
-		String command = execute + " " + stepByStep + " " + showAllSteps + " " + search + " " + webcam + " " + file;
+		String command = execute + " " + stepByStep + " " + showAllSteps + " " + search + " " + webcam + " " + speach + " " + file;
 		if(webcam){
 			if(webcamIntern)
 				command += "i ";
@@ -279,6 +279,7 @@ public class BarcodeGUI {
 			else
 				command += "m";
 		}
+
 		System.out.println(command);
 		try {
 			p = Runtime.getRuntime().exec(command);
