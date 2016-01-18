@@ -158,7 +158,8 @@ public class BarcodeGUI {
 				+ "<ul>"
 				+ "<li>OpenCV</li>"
 				+ "<li>ZBar</li>"
-				+ "<li>...</li>"
+				+ "<li>eSpeak</li>"
+				+ "<li>libcurl</li>"
 				+ "</ul>"
 				+ "&copy; Campfire Software, 2016<br>"
 				+ "veröffentlicht unter \"GNU General Public License\"</html>";
