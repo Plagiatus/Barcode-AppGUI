@@ -203,7 +203,7 @@ public class BarcodeGUI {
 		webcamBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				startDetection("", execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected(), true, webcamIntern.isSelected(), webcamSingle.isSelected());;
+				startDetection("leer", execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected(), true, webcamIntern.isSelected(), webcamSingle.isSelected());;
 			}
 		});
 		
@@ -267,7 +267,7 @@ public class BarcodeGUI {
 
 	private void startDetection(String file, String execute, boolean stepByStep, boolean showAllSteps, boolean search, boolean speach, boolean webcam, boolean webcamIntern, boolean webcamSingle) {
 		Process p;
-		String command = execute + " " + stepByStep + " " + showAllSteps + " " + search + " " + webcam + " " + speach + " " + file;
+		String command = execute + " " + stepByStep + " " + showAllSteps + " " + search + " " + webcam + " " + speach + " " + file + " ";
 		if(webcam){
 			if(webcamIntern)
 				command += "i ";
@@ -281,6 +281,7 @@ public class BarcodeGUI {
 		}
 
 		System.out.println(command);
+//		JOptionPane.showMessageDialog(null, "command:" + command);
 		try {
 			p = Runtime.getRuntime().exec(command);
 			p.waitFor();
