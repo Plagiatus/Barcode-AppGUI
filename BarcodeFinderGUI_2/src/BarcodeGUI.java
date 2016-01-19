@@ -195,15 +195,16 @@ public class BarcodeGUI {
 						break;
 				}
 				
-				
-				startDetection(exampleImgPath , execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected());
+				startDetection(execute, stepByStep.isSelected(), showAllFrames.isSelected(), searchResult.isSelected(), false, speach.isSelected(), exampleImgPath, false, false);
+//				startDetection(exampleImgPath , execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected());
 			}
 		});
 
 		webcamBut.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				startDetection("leer", execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected(), true, webcamIntern.isSelected(), webcamSingle.isSelected());;
+				startDetection(execute, stepByStep.isSelected(),showAllFrames.isSelected(), searchResult.isSelected(), true, speach.isSelected(), "leer",  webcamIntern.isSelected(), webcamSingle.isSelected());
+//				startDetection("leer", execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected(), true, webcamIntern.isSelected(), webcamSingle.isSelected());
 			}
 		});
 		
@@ -241,7 +242,7 @@ public class BarcodeGUI {
 					File file = fileChooser.getSelectedFile();
 					String fileString = fixPath(file.toString());
 					//System.out.println(fileString);
-					startDetection(fileString, execute, stepByStep.isSelected(),showAllFrames.isSelected(), speach.isSelected(), searchResult.isSelected());
+					startDetection(execute, stepByStep.isSelected(),showAllFrames.isSelected(), searchResult.isSelected(), false, speach.isSelected(), fileString, false, false);
 				}
 			}
 		});
@@ -261,11 +262,11 @@ public class BarcodeGUI {
 
 	}
 	
-	private void startDetection(String file, String execute, boolean stepByStep, boolean showAllSteps, boolean speach, boolean search){
+	/*private void startDetection(String file, String execute, boolean stepByStep, boolean showAllSteps, boolean speach, boolean search){
 		startDetection(file,execute,stepByStep,showAllSteps,search,speach,false,false,false);
-	}
+	}*/
 
-	private void startDetection(String file, String execute, boolean stepByStep, boolean showAllSteps, boolean search, boolean speach, boolean webcam, boolean webcamIntern, boolean webcamSingle) {
+	private void startDetection(String execute, boolean stepByStep, boolean showAllSteps, boolean search, boolean webcam, boolean speach, String file, boolean webcamIntern, boolean webcamSingle) {
 		Process p;
 		String command = execute + " " + stepByStep + " " + showAllSteps + " " + search + " " + webcam + " " + speach + " " + file + " ";
 		if(webcam){
@@ -281,7 +282,7 @@ public class BarcodeGUI {
 		}
 
 		System.out.println(command);
-//		JOptionPane.showMessageDialog(null, "command:" + command);
+		JOptionPane.showMessageDialog(null, "command:" + command);
 		try {
 			p = Runtime.getRuntime().exec(command);
 			p.waitFor();
