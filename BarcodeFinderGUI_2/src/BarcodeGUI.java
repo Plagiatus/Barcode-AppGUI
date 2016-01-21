@@ -37,7 +37,9 @@ public class BarcodeGUI {
 		guiFrame.setLocationRelativeTo(null);
 
 		// Optionen für die JComboBox
-		String[] examplePictures = { "Chipstüte", "Mandarinen", "MnM's", "4 Barcodes" };
+		String[] examplePictures = { "Chipstüte", "Chipstüte gedreht", "Mandarinen 1",
+										"Mandarinen 2", "Joghurt", "Toffifee", "MnM's",
+										"Wein", "Testbild: Brief", "4 Barcodes" };
 
 		
 		////////////////////////////////////////////////Barcode
@@ -131,38 +133,54 @@ public class BarcodeGUI {
 		infoPanel.setLayout(new BorderLayout());
 		
 		//Logos
-		ImageIcon logo = new ImageIcon("media/Logo_hr.png");
+		ImageIcon hfuLogo = new ImageIcon("media/Logo_HFU_low_trans.png");
+		Image hfuLogo1 = hfuLogo.getImage();
+		Image hfuLogo2 = hfuLogo1.getScaledInstance(100, 41, java.awt.Image.SCALE_SMOOTH); // 80, 33,
+		ImageIcon hfuLogo3 = new ImageIcon(hfuLogo2);
+		JLabel hfuLogoLabel = new JLabel(hfuLogo3);
+		
+		ImageIcon logo = new ImageIcon("media/Logo_small3.png"); //Logo_hr.png
 		Image logo1 = logo.getImage();
-		Image logo2 = logo1.getScaledInstance(100, 55, java.awt.Image.SCALE_SMOOTH);
+		Image logo2 = logo1.getScaledInstance(100, 55, java.awt.Image.SCALE_SMOOTH); //80, 44,
 		ImageIcon logo3 = new ImageIcon(logo2);
 		JLabel logoLabel = new JLabel(logo3);
 		
 		ImageIcon caLogo = new ImageIcon("media/campfire_logo.png");
 		Image caLogo1 = caLogo.getImage();
-		Image caLogo2 = caLogo1.getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH);
+		Image caLogo2 = caLogo1.getScaledInstance(100, 150, java.awt.Image.SCALE_SMOOTH); // 80, 120,
 		ImageIcon caLogo3 = new ImageIcon(caLogo2);
 		JLabel caLogoLabel = new JLabel(caLogo3);
 		
 		JPanel logos = new JPanel();
 		logos.setLayout(new BoxLayout(logos, BoxLayout.PAGE_AXIS));
+		logos.add(hfuLogoLabel);
 		logos.add(logoLabel);
 		logos.add(caLogoLabel);
-		
+
 		//Text
 		
 		String infoTxt = new String();
 		infoTxt = "<html><strong>Barcode Finder</strong><br>"
-				+ "<font size=2>Erstellt als Semesterprojekt an der <em>Fakultät Informatik der Hochschule Furtwangen</em>.<br>"
+				+ "<font size=2>Erstellt als Semesterprojekt an der<br>"
+				+ " <em>Fakultät Informatik der Hochschule Furtwangen (WS 2015/16)</em>.<br>"
 				+ "<br>" 
-				+ "Verwendete Open-Source Bibliotheken:<br>"
-				+ "<ul>"
-				+ "<li>OpenCV</li>"
-				+ "<li>ZBar</li>"
-				+ "<li>eSpeak</li>"
-				+ "<li>libcurl</li>"
-				+ "</ul>"
-				+ "&copy; Campfire Software, 2016<br>"
-				+ "veröffentlicht unter \"GNU General Public License\"</html>";
+				+ "Projektteilnehmer:<br>"
+//				+ "<ul>"
+				+ " - Björn Beha<br>"
+				+ " - Johannes Czech<br>"
+				+ " - Lukas Scheuerle<br>"
+				+ " - Suhay Sevinc<br>"
+//				+ "</ul>"
+				+ "<br>"
+				+ "Projektbetreuer:<br>"
+//				+ "<ul>"
+				+ " - Prof. Dr. Peter Fleischer<br>"
+				+ " - Judith Jakob<br>"
+//				+ "</ul>"
+				+ "<br>"
+				+ "&copy; Campfire Software, 2016 <br>" //veröffentlicht
+				+ "\"GNU General Public License\"" //unter
+				+ "</html>";
 		
 		JLabel infoText = new JLabel(infoTxt);
 		
@@ -170,6 +188,30 @@ public class BarcodeGUI {
 		infoPanel.add(logos, BorderLayout.EAST);
 		infoPanel.add(infoText, BorderLayout.CENTER);
 		
+
+		///////////////////////////////////////////////////// Info2
+		final JPanel infoPanel2 = new JPanel();
+		infoPanel2.setLayout(new BorderLayout());
+		
+		String infoTxt2 = new String();
+		infoTxt2 = "<html><header><h2>Barcode Finder</h2></header><br>"
+				+ "<br>"
+				+ "Verwendete <br>"
+				+ "Open-Source Bibliotheken:<br>"
+				+ "<ul>"
+				+ "<li>OpenCV</li>"
+				+ "<li>ZBar</li>"
+				+ "<li>eSpeak</li>"
+				+ "<li>libcurl</li>"
+				+ "</ul>"
+				+ "<br>"			
+				+ "<br>"
+				+ "<br>"
+				+ "</html>";
+		
+		JLabel infoText2 = new JLabel(infoTxt2);
+		
+		infoPanel2.add(infoText2, BorderLayout.CENTER);	
 		
 		///////////////////////////////////////////////////// BUTTONS
 
@@ -182,15 +224,34 @@ public class BarcodeGUI {
 					case("Chipstüte"):
 						exampleImgPath = "media/internet/chips.jpg";
 						break;
-					case("Mandarinen"):
+					case("Chipstüte gedreht"):
+						exampleImgPath = "media/internet/Chips_rotated.jpg";
+						break;
+					case("Mandarinen 1"):
 						exampleImgPath = "media/gut/mandarine.jpg";
 						break;
+					case("Mandarinen 2"):
+						exampleImgPath = "media/gut/mandarine_scaled.jpg";
+						break;
+					case("Joghurt"):
+						exampleImgPath = "media/gut/joghurt_scaled.jpg";
+						break;
+					case("Toffifee"):
+						exampleImgPath = "media/gut/toffifee_scaled.jpg";
+						break;	
 					case("MnM's"):
 						exampleImgPath = "media/gut/highQu_scaled.jpg";
 						break;
+					case("Wein"):
+						exampleImgPath = "media/gut/bottle_scaled.jpg";
+			 			break;
+					case("Testbild: Brief"):
+						exampleImgPath = "media/internet/brief.jpg";
+						break;		
 					case("4 Barcodes"):
 						exampleImgPath = "media/internet/test.png";
 						break;
+
 					default:
 						break;
 				}
@@ -252,10 +313,11 @@ public class BarcodeGUI {
 		tabbedPanel.addTab("Optionen",optionPanel);
 		tabbedPanel.addTab("Erweitert", advancedPanel);
 		tabbedPanel.addTab("Info",infoPanel);
-
+		tabbedPanel.addTab("Info2",infoPanel2);
+		
 		guiFrame.add(tabbedPanel, BorderLayout.CENTER);
 
-		//guiFrame.pack();
+//		guiFrame.pack();
 
 		guiFrame.setVisible(true);
 		guiFrame.setResizable(false);
@@ -268,7 +330,7 @@ public class BarcodeGUI {
 
 	private void startDetection(String execute, boolean stepByStep, boolean showAllSteps, boolean search, boolean webcam, boolean speach, String file, boolean webcamIntern, boolean webcamSingle) {
 		Process p;
-		String command = execute + " " + stepByStep + " " + showAllSteps + " " + search + " " + webcam + " " + speach + " " + file + " ";
+		String command = execute + " " + stepByStep + " " + showAllSteps + " " + search + " " + webcam + " " + speach + " \"" + file + "\" ";
 		if(webcam){
 			if(webcamIntern)
 				command += "i ";
@@ -282,7 +344,7 @@ public class BarcodeGUI {
 		}
 
 		System.out.println(command);
-		JOptionPane.showMessageDialog(null, "command:" + command);
+//		JOptionPane.showMessageDialog(null, "command:" + command);
 		try {
 			p = Runtime.getRuntime().exec(command);
 			p.waitFor();
