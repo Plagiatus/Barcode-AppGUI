@@ -39,7 +39,7 @@ public class BarcodeGUI {
 		// Optionen für die JComboBox
 		String[] examplePictures = { "Chipstüte", "Chipstüte gedreht", "Mandarinen 1",
 										"Mandarinen 2", "Joghurt", "Toffifee", "MnM's",
-										"Wein", "Testbild: Brief", "4 Barcodes" };
+										"Essig", "Testbild: Brief", "4 Barcodes" };
 
 		
 		////////////////////////////////////////////////Barcode
@@ -242,8 +242,8 @@ public class BarcodeGUI {
 					case("MnM's"):
 						exampleImgPath = "media/gut/highQu_scaled.jpg";
 						break;
-					case("Wein"):
-						exampleImgPath = "media/gut/bottle_scaled.jpg";
+					case("Essig"):
+						exampleImgPath = "media/gut/essig.jpg";
 			 			break;
 					case("Testbild: Brief"):
 						exampleImgPath = "media/internet/brief.jpg";
